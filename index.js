@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const app = express();
@@ -36,7 +37,7 @@ app.get('/app', (req, res) => {
 });
 
 setInterval(function() {
-        https.get('https://shoe-shop-api.onrender.com/app', (res) => {
+        https.get('https://shoe-shop-api-latest.onrender.com/app', (res) => {
             console.log('Hi, The app to keep it alive:', res.statusCode);
         }).on('error', (err) => {
             console.log('Error pinging the app:', err.message);
