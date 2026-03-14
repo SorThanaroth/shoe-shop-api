@@ -1,4 +1,4 @@
-name: 🐳 Backend – Build, Push to GHCR & Deploy to Render
+name: 🐳 Backend Build & Push Image
 
 on:
   push:

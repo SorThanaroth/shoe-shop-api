@@ -1,0 +1,26 @@
+name: 🚀 Backend Auto Deploy After GHCR Push
+
+on:
+  registry_package:
+    types: [published]
+
+jobs:
+  deploy:
+    name: Deploy Backend to Render
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Render Deploy Hook
+        run: |
+          echo "📦 New container image detected in GHCR"
+          echo "🚀 Triggering Render deployment..."
+
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}")
+
+          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
+            echo "✅ Render deployment triggered successfully (HTTP $STATUS)"
+          else
+            echo "❌ Render deploy failed (HTTP $STATUS)"
+            exit 1
+          fi
