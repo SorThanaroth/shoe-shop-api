@@ -12,4 +12,3 @@ module.exports = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
 }).with('password', 'repeat_password');
-

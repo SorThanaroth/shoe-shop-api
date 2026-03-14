@@ -7,6 +7,11 @@ module.exports = async () => {
     //   autoIndex: true,
     //   serverSelectionTimeoutMS: 30000 // default 30 seconds
     // });
+    console.log("URI Check:", process.env.MONGODB_URI); // <--- Add this
+    
+    if (!process.env.MONGODB_URI) {
+      throw new Error("MONGODB_URI is not defined in environment variables");
+    }
      await mongoose.connect(process.env.MONGODB_URI, {
       autoIndex: true,
       serverSelectionTimeoutMS: 30000 // default 30 seconds
